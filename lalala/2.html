@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman 2</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://i.pinimg.com/originals/94/70/9e/94709edff18abbfcecb713d95298574e.gif'); 
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .stone-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stone {
+            font-size: 50px;
+            cursor: pointer;
+            transition: opacity 0.5s ease, transform 0.2s ease;
+        }
+        .stone:hover {
+            transform: scale(1.1); /* Efek saat hover */
+        }
+        .stone.hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>klik 5 batu di bawah ini (knp 5? soalnya yg ultah batu banget)</h1>
+        <div class="stone-container">
+            <span class="stone" id="stone1">🪨</span>
+            <span class="stone" id="stone2">🪨</span>
+            <span class="stone" id="stone3">🪨</span>
+            <span class="stone" id="stone4">🪨</span>
+            <span class="stone" id="stone5">🪨</span>
+        </div>
+    </div>
+
+    <script>
+        let stonesClicked = 0;
+
+        document.getElementById('stone1').addEventListener('click', function() {
+            handleClick(this, 1);
+        });
+        document.getElementById('stone2').addEventListener('click', function() {
+            handleClick(this, 2);
+        });
+        document.getElementById('stone3').addEventListener('click', function() {
+            handleClick(this, 3);
+        });
+        document.getElementById('stone4').addEventListener('click', function() {
+            handleClick(this, 4);
+        });
+        document.getElementById('stone5').addEventListener('click', function() {
+            handleClick(this, 5);
+        });
+
+        function handleClick(element, order) {
+            if (stonesClicked + 1 === order) {
+                stonesClicked++;
+                element.classList.add('hidden');
+                setTimeout(function() {
+                    element.style.display = 'none';
+                }, 500);
+
+                if (stonesClicked === 5) {
+                    setTimeout(function() {
+                        window.location.href = '3.html';  // Arahkan ke halaman ketiga
+                    }, 500);
+                }
+            } else {
+                alert('minim urut lah lekkk!👊🏿');
+            }
+        }
+    </script>
+</body>
+</html>

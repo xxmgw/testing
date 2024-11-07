@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wide Envelope with Longer Scrollable Content</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Letakkan amplop lebih ke bawah */
+            font-family: sans-serif;
+            background-image: url('https://i.pinimg.com/originals/94/70/9e/94709edff18abbfcecb713d95298574e.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .wrapper {
+            height: 300px; /* Tetap lebih pendek */
+            width: 800px; /* Lebih panjang ke samping */
+            background-color: #ff007f;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px; /* Menggeser amplop ke bawah */
+            cursor: pointer;
+        }
+
+        .lid {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            border-right: 400px solid transparent;
+            border-bottom: 150px solid transparent;
+            border-left: 400px solid transparent;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        .lid.one {
+            border-top: 150px solid #ff1493;
+            transform: rotateX(0deg);
+            z-index: 3;
+            transition-delay: 0.75s;
+        }
+
+        .lid.two {
+            border-top: 150px solid #ff007f;
+            transform: rotateX(90deg);
+            z-index: 1;
+            transition-delay: 0.5s;
+        }
+
+        .envelope {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            border-top: 150px solid transparent;
+            border-right: 400px solid #ffc0cb;
+            border-bottom: 150px solid #ffc0cb;
+            border-left: 400px solid #ff6984;
+            z-index: 3;
+        }
+
+        .letter {
+            position: absolute;
+            top: -200px; /* Keluarkan lebih tinggi */
+            width: 90%; /* Sedikit lebih lebar dari amplop */
+            height: 500px; /* Lebih panjang saat dibuka */
+            background-color: white;
+            border-radius: 15px;
+            z-index: 2;
+            transition: 0.5s;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            opacity: 0; /* Surat tersembunyi saat amplop tertutup */
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            border-radius: 15px;
+        }
+
+        .image-container img {
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .wrapper:hover .lid.one {
+            transform: rotateX(90deg);
+            transition-delay: 0s;
+        }
+
+        .wrapper:hover .lid.two {
+            transform: rotateX(180deg);
+            transition-delay: 0.25s;
+        }
+
+        .wrapper:hover .letter {
+            transform: translateY(-100px);
+            opacity: 1; /* Tampilkan surat saat amplop dibuka */
+            transition-delay: 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="lid one"></div>
+        <div class="lid two"></div>
+        <div class="envelope"></div>
+        <div class="letter">
+            <div class="image-container">
+                <img src="hal1.jpg" alt="Page 1">
+                <img src="hal2.jpg" alt="Page 2">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman 1</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://i.pinimg.com/originals/94/70/9e/94709edff18abbfcecb713d95298574e.gif'); 
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #f39c12;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>masukkan namamu 👊🏿</h1>
+        <form id="nameForm" onsubmit="return validateForm()">
+            <input type="text" id="nameInput" placeholder="(clue : michelle batu)" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const inputName = document.getElementById('nameInput').value;
+            if (inputName.toLowerCase() === 'michelle batu') {
+                window.location.href = '2.html';  // Arahkan ke halaman kedua
+                return false;
+            } else {
+                alert('udah dikasi clue masi aja ngetik yang lain, emg beneran batu!');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

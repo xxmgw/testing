@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman 3 - Tiup Lilin</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://i.pinimg.com/originals/94/70/9e/94709edff18abbfcecb713d95298574e.gif');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 80%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .progress {
+            height: 100%;
+            width: 100%;
+            background-color: #ff9CCE;
+            transition: width 0.1s ease;
+        }
+
+        .cake {
+            margin-top: 50px;
+            width: 300px;
+            height: 300px;
+            background: url('https://file.aiquickdraw.com/imgcompressed/img/compressed_13d54b128bc3d7788724e802bf721546.webp') no-repeat center/cover;
+            position: relative;
+            z-index: 5;
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 250px;
+            font-size: 36px;
+            color: #ff9CCE;
+            font-weight: bold;
+        }
+
+        .candle-stick {
+            position: absolute;
+            width: 8px;
+            height: 50px;
+            background-color: #ff9CCE;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -40px;
+        }
+
+        #candle2 { left: 120px; }
+        #candle0 { left: 165px; }
+
+        .flame {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 20px;
+            background-color: orange;
+            border-radius: 50%;
+            animation: flicker 0.3s infinite alternate;
+            box-shadow: 0 0 8px rgba(255, 140, 0, 0.8);
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            25% { transform: translateX(-50%) scale(1.1); opacity: 0.9; }
+            50% { transform: translateX(-50%) scale(0.9); opacity: 0.8; }
+            75% { transform: translateX(-50%) scale(1.15); opacity: 0.95; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+
+        .blow-button {
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            background: url('https://img.icons8.com/ios-glyphs/50/000000/wind.png') no-repeat center/cover;
+            border: none;
+            background-color: transparent;
+            outline: none;
+            margin-top: 30px;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .confetti-gif {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10;
+            display: none;
+        }
+
+        /* Countdown Style */
+        .countdown {
+            font-size: 3em;
+            font-weight: bold;
+            color: #ff9CCE;
+            margin-top: 30px;
+            display: none; /* Initially hidden */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Background GIF -->
+    <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="cake">
+        <div class="candle" id="candle2">2
+            <div class="candle-stick"></div>
+            <div class="flame" id="flame2"></div>
+        </div>
+        <div class="candle" id="candle0">0
+            <div class="candle-stick"></div>
+            <div class="flame" id="flame0"></div>
+        </div>
+    </div>
+
+    <button class="blow-button" id="blowButton"></button>
+    <p class="message" id="message">Tekan tombol ini sambil niup lek!^^ (awas ga niup beneran)</p>
+
+    <img src="output-onlinegiftools.gif" alt="Confetti" class="confetti-gif" id="confettiGif">
+
+    <!-- Countdown -->
+    <div class="countdown" id="countdown">5</div>
+
+    <script>
+        let progress = 100;
+        const progressElement = document.getElementById('progress');
+        const blowButton = document.getElementById('blowButton');
+        const flame2 = document.getElementById('flame2');
+        const flame0 = document.getElementById('flame0');
+        const message = document.getElementById('message');
+        const confettiGif = document.getElementById('confettiGif');
+        const countdownElement = document.getElementById('countdown');
+
+        let countdownValue = 5;
+        let countdownStarted = false; // To track if countdown has started
+
+        function reduceProgress() {
+            if (progress > 0) {
+                progress -= 5;
+                progressElement.style.width = progress + '%';
+            }
+            if (progress <= 0) {
+                progress = 0;
+                flame2.style.display = 'none';
+                flame0.style.display = 'none';
+                message.textContent = "HORE RESMI KEPALA 2, HAPPY BDAYYY CELEKK!";
+                blowButton.disabled = true;
+                triggerConfetti();
+                if (!countdownStarted) {
+                    startCountdown(); // Start countdown when progress is 0
+                    countdownStarted = true;
+                }
+            }
+        }
+
+        function increaseProgress() {
+            if (progress < 100 && flame2.style.display !== 'none' && flame0.style.display !== 'none') {
+                progress += 1;
+                progressElement.style.width = progress + '%';
+            }
+        }
+
+        function triggerConfetti() {
+            confettiGif.style.display = 'block';
+        }
+
+        function startCountdown() {
+            countdownElement.style.display = 'block'; // Show the countdown
+            const countdownInterval = setInterval(() => {
+                countdownValue--;
+                countdownElement.textContent = countdownValue;
+
+                if (countdownValue === 0) {
+                    clearInterval(countdownInterval);
+                    goToNextPage(); // Redirect after countdown finishes
+                }
+            }, 1000); // Update every second
+        }
+
+        function goToNextPage() {
+            window.location.href = '4.html'; // Ganti dengan URL halaman tujuan
+        }
+
+        blowButton.addEventListener('click', reduceProgress);
+        setInterval(increaseProgress, 100);
+    </script>
+</body>
+</html>
